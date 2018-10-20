@@ -2,6 +2,7 @@
 
 ## Project setup
 ```
+git clone https://github.com/Glacialix/js-laboratory.git
 npm install
 ```
 
