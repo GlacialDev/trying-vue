@@ -1,8 +1,17 @@
-<template>
-  <div class="about">
-    <h1>This is an about page</h1>
-    <h1 class = 'meow_blue'>This is an about page</h1>
-    <h1 class = 'meow'>This is an about page</h1>
-    <h1>This is an about page</h1>
-  </div>
+<template lang='pug'>
+  .about
+    h1 This is about page
 </template>
+
+<script>
+export default {
+  name: "About",
+  components: {},
+  data() {
+    return {};
+  }
+};
+</script>
+
+<style lang='scss' scoped>
+</style>
