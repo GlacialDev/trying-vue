@@ -1,9 +1,7 @@
 <template lang="pug">
   #app
     Sidebar
-      //- <router-link to="/">Home</router-link> |
-      //- <router-link to="/about">About</router-link>
-    router-view
+    router-view.content-field
 </template>
 
 <script>
@@ -28,5 +26,9 @@ export default {
   display: flex;
   flex-direction: row;
   background-color: #f4f4f4;
+}
+
+.content-field {
+  flex-grow: 1;
 }
 </style>

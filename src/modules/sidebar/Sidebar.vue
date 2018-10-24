@@ -7,12 +7,12 @@
           path(d="M35.707,16.293c-0.391-0.391-1.023-0.391-1.414,0L26,24.586l-8.293-8.293c-0.391-0.391-1.023-0.391-1.414,0   s-0.391,1.023,0,1.414L24.586,26l-8.293,8.293c-0.391,0.391-0.391,1.023,0,1.414C16.488,35.902,16.744,36,17,36   s0.512-0.098,0.707-0.293L26,27.414l8.293,8.293C34.488,35.902,34.744,36,35,36s0.512-0.098,0.707-0.293   c0.391-0.391,0.391-1.023,0-1.414L27.414,26l8.293-8.293C36.098,17.316,36.098,16.684,35.707,16.293z" fill="#ffffff")
     ul.sidebar_btn-list
       li.sidebar_btn-item
-        a.sidebar_btn-link
+        router-link(to="/about").sidebar_btn-link
           svg.sidebar_btn-icon(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 26 26" version="1.1" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="48px" height="48px")
             g
               path(d="M 13 0.15625 C 9.824219 0.15625 7.09375 2.296875 7.09375 6.40625 C 7.09375 9.089844 8.351563 11.816406 10 13.5 C 10.265625 14.199219 10.21875 14.722656 10.0625 15.09375 C 10.277344 15.382813 11.113281 16.226563 12.5 16.40625 C 11.988281 16.984375 11.320313 18.179688 10.78125 19.375 C 9.742188 17.902344 9 16 9 16 C 5.730469 17.21875 2.03125 19.359375 2.03125 21.46875 L 2.03125 22.28125 C 2.03125 25.226563 7.742188 25.875 13.03125 25.875 C 18.328125 25.875 23.96875 25.226563 23.96875 22.28125 L 23.96875 21.46875 C 23.96875 19.328125 20.34375 17.214844 16.96875 16.03125 C 16.96875 16.03125 16.25 17.914063 15.21875 19.375 C 14.679688 18.175781 14.015625 16.984375 13.5 16.40625 C 14.835938 16.242188 15.648438 15.457031 15.90625 15.125 C 15.796875 14.761719 15.78125 14.257813 16.03125 13.5 C 17.667969 11.8125 18.90625 9.078125 18.90625 6.40625 C 18.90625 2.300781 16.175781 0.15625 13 0.15625 Z" fill="#ffffff")
       li.sidebar_btn-item
-        a.sidebar_btn-link
+        router-link(to="/blog").sidebar_btn-link
           svg.sidebar_btn-icon(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="48px" height="48px")
             g
               path(d="M0,30v452h512V30H0z M482,452H30V120h452V452z M482,90H30V60h452V90z" fill="#FFFFFF")
@@ -92,8 +92,8 @@ export default {
       let closeButton = document.getElementsByClassName("sidebar_close-icon");
       let sidebar = document.getElementsByClassName("sidebar_btn-list");
 
-      closeButton[0].classList.toggle("hide_sidebar")
-      sidebar[0].classList.toggle("hide_sidebar")
+      closeButton[0].classList.toggle("hide_sidebar");
+      sidebar[0].classList.toggle("hide_sidebar");
     }
   }
 };
@@ -113,12 +113,12 @@ export default {
 
   &_close-btn {
     width: 100%;
-    background-color: #226441;
-    border-right: 1px solid #46cf86;
-    border-bottom: 1px solid #46cf86;
+    background-color: $medium_green;
+    border-right: 1px solid $light_green;
+    border-bottom: 1px solid $light_green;
     transition: 0.3s;
     &:hover {
-      background-color: #0f2c1d;
+      background-color: $dark_green;
     }
   }
 
@@ -139,8 +139,8 @@ export default {
   &_btn-list {
     height: 100%;
     width: 100%;
-    background-color: #226441;
-    border-right: 1px solid #46cf86;
+    background-color: $medium_green;
+    border-right: 1px solid $light_green;
     transition: 0.5s;
     &.hide_sidebar {
       transform: translateX(-100%);
@@ -148,10 +148,10 @@ export default {
   }
 
   &_btn-item {
-    border-bottom: 1px solid #46cf86;
+    border-bottom: 1px solid $light_green;
     transition: 0.3s;
     &:hover {
-      background-color: #0f2c1d;
+      background-color: $dark_green;
     }
   }
 
