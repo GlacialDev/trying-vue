@@ -27,7 +27,7 @@
                 rect(x="60" y="300" width="181" height="30" fill="#FFFFFF")
               g
                 rect(x="60" y="360" width="121" height="30" fill="#FFFFFF")
-        li.sidebar_btn-item
+        li.sidebar_btn-item(@click="changeChatHiddenState")
           a.sidebar_btn-link
             svg.sidebar_btn-icon(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve" width="48px" height="48px")
               g
@@ -89,6 +89,11 @@ export default {
     return {
       sidebar_show: true
     };
+  },
+  methods: {
+    changeChatHiddenState() {
+      this.$store.commit("changeChatHiddenState");
+    }
   }
 };
 </script>
@@ -98,8 +103,7 @@ export default {
 
 .sidebar {
   position: fixed;
-  min-width: 48px;
-  width: 3%;
+  width: rem(48px);
   height: 100vh;
   display: flex;
   flex-direction: column;
