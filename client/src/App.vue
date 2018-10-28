@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Sidebar from "./modules/sidebar/Sidebar";
+import Sidebar from "./components/sidebar/Sidebar";
 import Chat from "./components/chat/Chat";
 
 export default {

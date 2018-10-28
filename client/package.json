@@ -1,6 +1,7 @@
 {
   "name": "js-laboratory",
   "version": "0.1.0",
+  "description": "client-side js-laboratory",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

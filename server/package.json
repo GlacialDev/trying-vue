@@ -4,7 +4,7 @@
   "description": "server-side js-laboratory",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --ext js --watch src"
+    "serve": "nodemon --ext js --watch src"
   },
   "author": "Glacialix",
   "license": "ISC",
@@ -12,6 +12,8 @@
     "nodemon": "^1.18.5"
   },
   "dependencies": {
+    "apiai": "^4.0.3",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.4",

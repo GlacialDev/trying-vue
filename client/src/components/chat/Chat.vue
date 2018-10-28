@@ -2,35 +2,13 @@
   .chat(ref="chat")
     .chat_header(ref="chat_header")
       .chat_header-text Чат с ботом
+      button.chat_header-close(type="button" @click="changeChatHiddenState") Close
     .chat_body
       ul.chat_body-list
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
-        li.chat_body-item asdsadsa
+        li.chat_body-item(v-for="message in messageList") {{message}}
     .chat_input-field
       form.chat_input-form
-        input(type="text")
+        input(type="text" ref="text_input")
         button(type="submit" @click.prevent="chatRequest") Enter
 </template>
 
@@ -41,7 +19,11 @@ export default {
   name: "Chat",
   components: {},
   data() {
-    return {};
+    return {
+      messageList: [
+        "Введите сообщение..."
+      ]
+    };
   },
   methods: {
     drag: function() {
@@ -103,31 +85,16 @@ export default {
       }
     },
     chatRequest: function() {
-      const DIALOG_FLOW_TOKEN = "73d8ac0fca364dddbc531bd0fe06cd5a";
-      const DIALOG_FLOW_API_ROOT_URL =
-        "https://api.dialogflow.com/v1/query?v=20150910";
-      const YOUR_PROJECT_ID = "newagent-1f076";
-      const SESSION_ID = "Site_talk_to_you";
-      const URL = `${DIALOG_FLOW_API_ROOT_URL}/projects/${YOUR_PROJECT_ID}/agent/sessions/${SESSION_ID}`;
-
-      var config = {
-        headers: {
-          Authorization: "Bearer " + DIALOG_FLOW_TOKEN,
-          "Content-Type": "application/json"
-        }
-      };
-
-      // export function sendText(text) {
-      var bodyParameters = {
-        queryInput: { text: { text: "привет", languageCode: "ru" } }
-      };
-
-      const request = axios.post(URL, bodyParameters, config);
-
-      console.log(request);
-      // console.log(response);
-      return request;
-      // }
+      let text = this.$refs.text_input.value;
+      this.messageList.push("Вы: "+text);
+      this.$refs.text_input.value = '';
+      let self = this
+      axios.get(`http://localhost:8081/chatbot/?text=${text}`).then(response => {
+        self.messageList.push("Бот: "+response.data.answer)
+      })
+    },
+    changeChatHiddenState() {
+      this.$store.commit("changeChatHiddenState");
     }
   },
   mounted: function() {
@@ -158,6 +125,10 @@ export default {
 
     &-text {
       color: #ffffff;
+    }
+
+    &-close {
+      margin-left: rem(16px);
     }
   }
 
