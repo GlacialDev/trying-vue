@@ -31,10 +31,12 @@
     .chat_input-field
       form.chat_input-form
         input(type="text")
-        button(type="submit") Enter
+        button(type="submit" @click.prevent="chatRequest") Enter
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Chat",
   components: {},
@@ -99,6 +101,33 @@ export default {
           left: box.left + pageXOffset
         };
       }
+    },
+    chatRequest: function() {
+      const DIALOG_FLOW_TOKEN = "73d8ac0fca364dddbc531bd0fe06cd5a";
+      const DIALOG_FLOW_API_ROOT_URL =
+        "https://api.dialogflow.com/v1/query?v=20150910";
+      const YOUR_PROJECT_ID = "newagent-1f076";
+      const SESSION_ID = "Site_talk_to_you";
+      const URL = `${DIALOG_FLOW_API_ROOT_URL}/projects/${YOUR_PROJECT_ID}/agent/sessions/${SESSION_ID}`;
+
+      var config = {
+        headers: {
+          Authorization: "Bearer " + DIALOG_FLOW_TOKEN,
+          "Content-Type": "application/json"
+        }
+      };
+
+      // export function sendText(text) {
+      var bodyParameters = {
+        queryInput: { text: { text: "привет", languageCode: "ru" } }
+      };
+
+      const request = axios.post(URL, bodyParameters, config);
+
+      console.log(request);
+      // console.log(response);
+      return request;
+      // }
     }
   },
   mounted: function() {
