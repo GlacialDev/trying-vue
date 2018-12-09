@@ -4,16 +4,21 @@ const cors = require('cors')
 const morgan = require('morgan')
 const app = express()
 const config = require('./src/config/config')
+const secretConfig = require('./src/secret/config')
 const apiai = require('apiai')
-let dialogflow = apiai(config.apiaiKey)
-
+let dialogflow = apiai(secretConfig.apiaiKey)
 
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.listen(process.env.PORT || config.port,
-  () => console.log(`Server start on port ${config.port} ...`))
+let port = process.env.PORT || config.port;
+app.set('env', 'development');
+app.set('port', port);
+
+app.listen(port, function () {
+    console.log('Express server listening to port ' + port);
+});
 
 app.get('/chatbot', (req, res) => {
   let text = req.query.text
@@ -31,17 +36,17 @@ function talk(text) {
     let talkRequest = dialogflow.textRequest(text, {
       sessionId: 'Canadian_bot_talk_to_you'
     });
-  
+
     talkRequest.on('response', function (response) {
       let answer = response.result.fulfillment.speech
       if(answer === '') answer = "Я не знаю, что тебе на это ответить."
       resolve(answer)
     });
-  
+
     talkRequest.on('error', function (error) {
       reject(error)
     });
-  
+
     talkRequest.end();
   })
 }

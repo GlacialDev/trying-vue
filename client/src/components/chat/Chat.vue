@@ -20,9 +20,7 @@ export default {
   components: {},
   data() {
     return {
-      messageList: [
-        "Введите сообщение..."
-      ]
+      messageList: ["Введите сообщение..."]
     };
   },
   methods: {
@@ -86,12 +84,14 @@ export default {
     },
     chatRequest: function() {
       let text = this.$refs.text_input.value;
-      this.messageList.push("Вы: "+text);
-      this.$refs.text_input.value = '';
-      let self = this
-      axios.get(`http://localhost:8081/chatbot/?text=${text}`).then(response => {
-        self.messageList.push("Бот: "+response.data.answer)
-      })
+      this.messageList.push("Вы: " + text);
+      this.$refs.text_input.value = "";
+      let self = this;
+      axios
+        .get(`http://js-laboratory.com:9000/chatbot/?text=${text}`)
+        .then(response => {
+          self.messageList.push("Бот: " + response.data.answer);
+        });
     },
     changeChatHiddenState() {
       this.$store.commit("changeChatHiddenState");
