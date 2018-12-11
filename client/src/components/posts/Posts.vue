@@ -2,9 +2,7 @@
   .posts
     .posts_pagination-wrapper
       ul.posts_pagination-list
-        li.posts_pagination-item 1
-        li.posts_pagination-item 2
-        li.posts_pagination-item 3
+        li.posts_pagination-item(v-for="btn in BtnsAmount") {{ btn }}
     .posts_list-wrapper
       ul.posts_list
         li.posts_item(v-for="post in posts")
@@ -621,13 +619,17 @@ export default {
             "В далеком и далеко не новом комплекте измерений, в том крыле космоса, которое никогда не предназначалось для полета, клубящиеся звездные туманы дрожат, расступаются и… Смотрите… То приближается Великий А'Туин, черепаха, медленно плывущая по межзвездному проливу. На Ее могучих ластах инеем застыл водород, Ее гигантский и древний панцирь изрыт метеоритными кратерами, а глаза величиной с два моря, покрытые слизью и астероидной пылью, неотрывно глядят в сторону Цели. В Ее мозгу, превышающем размерами город, с геологической медлительностью ворочаются мысли, и все они – о Бремени. Большую часть Бремени составляют четыре исполинских слона, на чьих спинах покоится диск Плоского мира, накрытый нежно-голубым куполом Небес."
         }
       ],
-      currentPosts: []
+      currentPosts: [],
+      BtnsAmount: 0
     };
   },
   methods: {
-    buildPagination: function(postsAmount) {
-      let btnsMaxAmount = Math.ceil(postsAmount / 10);
+    buildPagination: function() {
+      this.BtnsAmount = Math.ceil(this.posts.length / 10);
     }
+  },
+  mounted: function() {
+    this.buildPagination();
   }
 };
 </script>
@@ -659,11 +661,27 @@ export default {
       flex-direction: row;
     }
     &-item {
+      cursor: pointer;
       min-width: rem(48px);
       min-height: rem(48px);
       text-align: center;
       line-height: rem(48px);
-      border: 1px solid red;
+      border: rem(1px) solid $medium_green;
+      border-left: none;
+      &:nth-child(1) {
+        border-left: rem(1px) solid $medium_green;
+        border-top-left-radius: rem(3px);
+        border-bottom-left-radius: rem(3px);
+      }
+      &:nth-last-child(1) {
+        border-top-right-radius: rem(3px);
+        border-bottom-right-radius: rem(3px);
+      }
+
+      &:hover {
+        background-color: $medium_green;
+        color: #fff;
+      }
     }
   }
 }
