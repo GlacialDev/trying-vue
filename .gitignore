@@ -20,4 +20,5 @@ yarn-error.log*
 *.sln
 *.sw*
 
-/server/src/secret
+/server/src/modules/config/secret
+/server/bundle.js
