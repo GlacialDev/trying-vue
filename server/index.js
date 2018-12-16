@@ -16,9 +16,24 @@ let port = process.env.PORT || config.port;
 app.set('env', 'development');
 app.set('port', port);
 
-app.listen(port, function () {
-    console.log('Express server listening to port ' + port);
-});
+// app.listen(port, function () {
+//     console.log('Express server listening to port ' + port);
+// });
+
+import db from "./src/modules/database/db"
+db.connect('mongodb://localhost:27017', 'second', (err) => {
+    if (err) {
+        // isDatabaseOn = false
+        console.log('Database is not available, reactions/polls disabled')
+    }
+    app.listen(port, () => {
+        // isDatabaseOn = true
+        console.log('Express server listening to port ' + port);
+        console.log('Database is available')
+    })
+})
 
 import chat_widget from "./src/modules/chat_widget";
 chat_widget(app, dialogflow);
+import api_blog from "./src/modules/database/api_blog"
+api_blog(app)

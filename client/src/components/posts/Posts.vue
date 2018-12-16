@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Posts",
   components: {},
@@ -705,11 +707,22 @@ export default {
       let firstPostIndex = btnIndex * 10 - 10;
       let lastPostIndex = btnIndex * 10 - 1;
       this.currentPosts = this.posts.slice(firstPostIndex, lastPostIndex);
-    }
+    },
+
+    getPosts: function() {
+      axios
+        .get('http://localhost:9000/blogposts')
+        .then(res => {
+          this.posts = res.data
+        })
+        .then( () => {          
+          this.BtnsAmount = Math.ceil(this.posts.length / 10);
+          this.currentPosts = this.posts.slice(0, 10);
+        });
+    } 
   },
   mounted: function() {
-    this.BtnsAmount = Math.ceil(this.posts.length / 10);
-    this.currentPosts = this.posts.slice(0, 10);
+    this.getPosts();
   }
 };
 </script>
